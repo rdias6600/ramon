@@ -57,7 +57,7 @@ EOF
 sleep 0.5
 
 echo -e "${_g}==> Criando senha user${_o}"
-useradd -m -g users -G wheel,power,storage  -s /bin/bash $_user
+useradd -m -g users -G wheel,power,storage -s /bin/bash $_user
 passwd $_user << EOF
 $_puser
 $_puser
