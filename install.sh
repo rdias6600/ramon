@@ -186,7 +186,7 @@ pacman -Sy reflector --noconfirm && reflector --verbose -l 5 --sort rate --save 
 
 # instalando base e base-devel
 echo -e "${_g}==> Instalando base/base-devel${_o}"; sleep 1
-pacstrap -i /mnt base base-devel
+pacstrap /mnt base base-devel
 
 # gerando fstab
 echo -e "${_g}==> Gerando FSTAB${_o}"; sleep 1
