@@ -57,7 +57,7 @@ EOF
 sleep 0.5
 
 echo -e "${_g}==> Criando senha user${_o}"
-useradd -m -g users -G wheel -s /bin/bash $_user
+useradd -m -g users -G wheel,power,storage  -s /bin/bash $_user
 passwd $_user << EOF
 $_puser
 $_puser
@@ -89,7 +89,7 @@ fi
 
 if [[ "$_notebook" == "s" ]]; then
 	echo -e "${_g}==> Instalando drivers para notebook${_o}"; sleep 1
-	pacman -S wpa-supplicant networkmanager net-tools --noconfirm # remove the repository (wpa_actiond)
+	pacman -S wpa_supplicant dialog iw networkmanager --noconfirm # remove the repository (wpa_actiond)
 fi
 
 echo -e "${_g}==> mkinitcpio${_o}"
