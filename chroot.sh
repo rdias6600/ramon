@@ -33,8 +33,8 @@ echo "KEYMAP=br-abnt2" > /etc/vconsole.conf
 echo -e "${_g}==> Configurando Horário America/Fortaleza${_o}"; sleep 1
 ln -sf /usr/share/zoneinfo/America/Fortaleza /etc/localtime && hwclock --systohc --utc
 
-echo -e "${_g}==> Inserindo hostname arch em /etc/hostname${_o}"; sleep 1
-echo "arch" > /etc/hostname
+echo -e "${_g}==> Inserindo hostname Inspiron-7472 em /etc/hostname${_o}"; sleep 1
+echo "Inspiron-7472" > /etc/hostname
 
 echo -e "${_g}==> Inserindo dados em /etc/hosts${_o}"; sleep 1
 echo -e "127.0.0.1\tlocalhost.localdomain\tlocalhost\n::1\tlocalhost.localdomain\tlocalhost\n127.0.1.1\tarch.localdomain\tarch\n" > /etc/hosts
