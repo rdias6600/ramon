@@ -89,7 +89,7 @@ fi
 
 if [[ "$_notebook" == "s" ]]; then
 	echo -e "${_g}==> Instalando drivers para notebook${_o}"; sleep 1
-	pacman -S wpa_supplicant networkmanager net-tools --noconfirm # remove the repository (wpa_actiond)
+	pacman -S wpa_supplicant networkmanager net-tools acpi acpid --noconfirm # remove the repository (wpa_actiond)
 fi
 
 echo -e "${_g}==> mkinitcpio${_o}"
