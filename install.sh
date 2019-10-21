@@ -26,12 +26,6 @@ cat <<EOL
 			tição Swap, Root e Home (Swap/Home não obrigatórias)
 		
 			Utilizaremos o particionador CFDISK
-			Código das Partições para quem quiser usar GDISK:
-			==> EF02 BIOS
-			==> EF00 EFI
-			==> 8200 SWAP
-			==> 8304 /
-			==> 8302 /home
 			
 			====================================================
 			
@@ -65,7 +59,7 @@ cfdisk $_hd # entrando no particionador cfdisk
 
 tput reset; setterm -cursor off
 
-echo -e "\n${_n} OK, você definiu as partições, caso deseje cancelar, precione${_w}: ${_am}Ctrl+C${_o}"
+echo -e "\n${_n} OK, você definiu as partições, caso deseje cancelar, pressione${_w}: ${_am}Ctrl+C${_o}"
 echo -e "\n${_n} Use os número das partições nas perguntas abaixo${_w}\n"
 
 echo "==========================================================="
@@ -149,7 +143,7 @@ echo "==========================================================="
 fdisk -l $_hd
 echo "==========================================================="
 
-echo -e "\n Verifique se as informações estão corretas comparando com os dados acima.\n"
+echo -e "\n Verifique se as informações estão corretas comparando com os dados acima."
 echo -ne "\n Se tudo estiver certo, Digite ${_g}s/S${_o} para continuar ou ${_g}n/N${_o} para cancelar: "; read -n 1 comecar
 
 if [[ "$comecar" != @(S|s) ]]; then
@@ -181,12 +175,12 @@ if [[ "$_uefi" != "" ]]; then
 fi
 
 # set morrorlist br (opcional)
-#
-#
+# echo -e "${_g}==> Setando mirrorlist${_o}"; sleep 1
+# wget "https://raw.githubusercontent.com/leoarch/arch/master/arch/mirrorlist" -O /etc/pacman.d/mirrorlist 2>/dev/null
 
 # instalando base e base-devel
 echo -e "${_g}==> Instalando base/base-devel${_o}"; sleep 1
-pacstrap /mnt base base-devel
+pacstrap /mnt base base-devel linux linux-firmware
 
 # gerando fstab
 echo -e "${_g}==> Gerando FSTAB${_o}"; sleep 1
