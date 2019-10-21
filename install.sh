@@ -181,8 +181,8 @@ if [[ "$_uefi" != "" ]]; then
 fi
 
 # set morrorlist br (opcional)
-echo -e "${_g}==> Setando mirrorlist${_o}"; sleep 1
-pacman -Sy reflector --noconfirm && reflector --verbose -l 5 --sort rate --save /etc/pacman.d/mirrorlist
+#
+#
 
 # instalando base e base-devel
 echo -e "${_g}==> Instalando base/base-devel${_o}"; sleep 1
