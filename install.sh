@@ -2,7 +2,7 @@
 
 tput reset
 
-# cores
+# colors
 __Y=$(echo -e "\e[33;1m");__A=$(echo -e "\e[36;1m");__R=$(echo -e "\e[31;1m");__O=$(echo -e "\e[m");
 _n="\e[36;1m";_w="\e[37;1m";_g="\e[32;1m";_am="\e[33;1m";_o="\e[m";_r="\e[31;1m";_p="\e[33;0m";
 
@@ -45,15 +45,15 @@ tput reset
 
 echo
 
-lsblk -l | grep disk # comando para listar os discos
+lsblk -l | grep disk # list disk
 
 echo -e "\n${_g} Logo acima estão listados os seus discos${_o}"
-echo -en "\n${_g} Informe o nome do seu disco${_o} (Ex: ${_r}sda${_o}):${_w} "; read  _hd
-_hd="/dev/${_hd}"; export _hd
+echo -en "\n${_g} Informe o nome do seu disco${_o} (Ex: ${_r}sda${_o}):${_w} "; read _disk; export _disk
+_hd="/dev/${_disk}"; export _hd
 
 echo
 
-cfdisk $_hd # entrando no particionador cfdisk
+cfdisk $_hd # start partition with cfdisk
 
 [ $? -ne 0 ] && { echo -e "\n${_r} ATENÇÃO:${_o} Disco ${_am}$_hd${_o} não existe! Execute novamente o script e insira o número corretamente.\n"; exit 1; }
 
@@ -74,10 +74,10 @@ echo -en "\n ${_p}Digite o número da partição${_o} ${_g}RAÍZ /${_o}${_am} (P
 [ "$_root" == "" ] && { echo -e "\n${_am}Atenção:${_o} ${_p}Partição RAÍZ é obrigatória! Execute novamente o script e digite o número correto!\n${_o}"; exit 1; }
 echo -en "\n${_p} Digite o número da partição${_o} ${_g}HOME${_o} ou tecle ${_am}ENTER${_o} caso não tenha:${_w} "; read _home
 
-_root="/dev/sda${_root}"; export _root
-[ -n "$_uefi" ] && { _uefi="/dev/sda${_uefi}"; export _uefi; }
-[ -n "$_swap" ] && { _swap="/dev/sda${_swap}"; export _swap; }
-[ -n "$_home" ] && { _home="/dev/sda${_home}"; export _home; }
+_root="/dev/${_disk}${_root}"; export _root
+[ -n "$_uefi" ] && { _uefi="/dev/${_disk}${_uefi}"; export _uefi; }
+[ -n "$_swap" ] && { _swap="/dev/${_disk}${_swap}"; export _swap; }
+[ -n "$_home" ] && { _home="/dev/${_disk}${_home}"; export _home; }
 
 echo
 
@@ -175,7 +175,7 @@ if [[ "$_uefi" != "" ]]; then
 fi
 
 # set morrorlist br (opcional)
-# echo -e "${_g}==> Setando mirrorlist${_o}"; sleep 1
+# echo -e "${_g}==> Setando mirrorlist BR${_o}"; sleep 1
 # wget "https://raw.githubusercontent.com/leoarch/arch/master/arch/mirrorlist" -O /etc/pacman.d/mirrorlist 2>/dev/null
 
 # instalando base e base-devel
