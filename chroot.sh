@@ -57,7 +57,7 @@ EOF
 sleep 0.5
 
 echo -e "${_g}==> Criando senha user${_o}"
-useradd -m -g users -G wheel,power,storage -s /bin/bash $_user
+useradd -m -g users -G wheel -s /bin/bash $_user
 passwd $_user << EOF
 $_puser
 $_puser
@@ -69,7 +69,7 @@ pacman -Syu --noconfirm
 
 # no meu caso, o dhclient funciona pro meu roteador e dhcpcd não (altere a vontade)
 # echo -e "${_g}==> Instalando dhclient${_o}"
-# pacman -S dhclient dhcpcd dialog wget --noconfirm
+# pacman -S dialog wget nano --noconfirm # remove dhclient dhcpcd
 
 # grub configuration
 if [[ "$_uefi" != "" ]]; then
@@ -82,14 +82,14 @@ else
 	pacman -S grub intel-ucode --noconfirm
 	# dual boot
 	# [[ "$_dualboot" == "s" ]] && { pacman -S os-prober --noconfirm; }
-	grub-install --target=i386-pc --recheck /dev/sda
+	grub-install --target=i386-pc --recheck /dev/${_disk}
 	cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
 	grub-mkconfig -o /boot/grub/grub.cfg
 fi
 
 if [[ "$_notebook" == "s" ]]; then
 	echo -e "${_g}==> Instalando drivers para notebook${_o}"; sleep 1
-	pacman -S networkmanager wireless_tools wpa_supplicant --noconfirm # remove the repository (wpa_actiond)
+	pacman -S networkmanager wireless_tools wpa_supplicant acpi acpid --noconfirm # remove the repository (wpa_actiond)
 fi
 
 echo -e "${_g}==> mkinitcpio${_o}"
