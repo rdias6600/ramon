@@ -180,7 +180,7 @@ fi
 
 # instalando base e base-devel
 echo -e "${_g}==> Instalando base/base-devel${_o}"; sleep 1
-pacstrap /mnt base linux linux-firmware
+pacstrap /mnt base base-devel linux linux-firmware
 
 # gerando fstab
 echo -e "${_g}==> Gerando FSTAB${_o}"; sleep 1
