@@ -175,8 +175,8 @@ if [[ "$_uefi" != "" ]]; then
 fi
 
 # set morrorlist br (opcional)
-#echo -e "${_g}==> Setando mirrorlist BR${_o}"; sleep 1
-#wget "https://raw.githubusercontent.com/leoarch/arch/master/arch/mirrorlist" -O /etc/pacman.d/mirrorlist 2>/dev/null
+echo -e "${_g}==> Setando mirrorlist BR${_o}"; sleep 1
+wget "https://raw.githubusercontent.com/leoarch/arch/master/arch/mirrorlist" -O /etc/pacman.d/mirrorlist 2>/dev/null
 
 # instalando base e base-devel
 echo -e "${_g}==> Instalando base/base-devel${_o}"; sleep 1
