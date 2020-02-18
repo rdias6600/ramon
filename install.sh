@@ -155,23 +155,23 @@ echo -e "\n\n ${_n}Continuando com a instalação ...${_o}\n"; sleep 1
 # swap
 if [[ "$_swap" != "" ]]; then
 	echo -e "${_g}==> Criando e ligando Swap${_o}"; sleep 1
-	mkswap $_swap && swapon $_swap
+	mkswap /dev/sda1 && swapon /dev/sda1
 fi
 
 # root
 echo -e "\n${_g}==> Formatando e Montando Root${_o}"; sleep 1
-mkfs.ext4 -F $_root && mount $_root /mnt
+mkfs.ext4 -F /dev/nvme0n1p2 && mount /dev/nvme0n1p2 /mnt
 
 # home
 if [[ "$_home" != "" ]]; then
 	echo -e "${_g}==> Formatando, Criando e Montando Home${_o}"; sleep 1
-	mkfs.ext4 -F $_home && mkdir /mnt/home && mount $_home /mnt/home	
+	mkfs.ext4 -F /dev/sda2 && mkdir /mnt/home && mount /dev/sda2 /mnt/home	
 fi
 
 # efi
 if [[ "$_uefi" != "" ]]; then
 	echo -e "${_g}Formatando, Criando e Montando EFI${_o}"; sleep 1
-	mkfs.fat -F32 $_uefi && mkdir /mnt/boot && mount $_uefi /mnt/boot
+	mkfs.fat -F32 /dev/nvme0n1p1 && mkdir /mnt/boot && mount /dev/nvme0n1p1 /mnt/boot
 fi
 
 # set morrorlist br (opcional)
