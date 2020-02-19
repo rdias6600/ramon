@@ -153,20 +153,20 @@ fi
 echo -e "\n\n ${_n}Continuando com a instalação ...${_o}\n"; sleep 1
 
 # swap
-#if [[ "$_swap" != "" ]]; then
+if [[ "$_swap" != "" ]]; then
 	echo -e "${_g}==> Criando e ligando Swap${_o}"; sleep 1
-	mkswap /dev/sda1 && swapon /dev/sda1
-#fi
+	mkswap $_swap && swapon $_swap
+fi
 
 # root
 echo -e "\n${_g}==> Formatando e Montando Root${_o}"; sleep 1
 mkfs.ext4 -F /dev/nvme0n1p2 && mount /dev/nvme0n1p2 /mnt
 
 # home
-#if [[ "$_home" != "" ]]; then
+if [[ "$_home" != "" ]]; then
 	echo -e "${_g}==> Formatando, Criando e Montando Home${_o}"; sleep 1
-	mkfs.ext4 -F /dev/sda2 && mkdir /mnt/home && mount /dev/sda2 /mnt/home	
-#fi
+	mkfs.ext4 -F $_home && mkdir /mnt/home && mount $_home /mnt/home	
+fi
 
 # efi
 if [[ "$_uefi" != "" ]]; then
