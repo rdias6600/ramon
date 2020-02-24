@@ -74,8 +74,8 @@ echo -en "\n ${_p}Digite o número da partição${_o} ${_g}RAÍZ /${_o}${_am} (P
 [ "$_root" == "" ] && { echo -e "\n${_am}Atenção:${_o} ${_p}Partição RAÍZ é obrigatória! Execute novamente o script e digite o número correto!\n${_o}"; exit 1; }
 echo -en "\n${_p} Digite o número da partição${_o} ${_g}HOME${_o} ou tecle ${_am}ENTER${_o} caso não tenha:${_w} "; read _home
 
-_root="/dev/nvme0n1p${_root}"; export _root
-[ -n "$_uefi" ] && { _uefi="/dev/nvme0n1p${_uefi}"; export _uefi; }
+_root="/dev/${_disk}${_root}"; export _root
+[ -n "$_uefi" ] && { _uefi="/dev/${_disk}${_uefi}"; export _uefi; }
 [ -n "$_swap" ] && { _swap="/dev/${_disk}${_swap}"; export _swap; }
 [ -n "$_home" ] && { _home="/dev/${_disk}${_home}"; export _home; }
 
