@@ -69,9 +69,9 @@ echo "==========================================================="
 echo -e "\n${_n} CONSULTE ACIMA O NÚMERO DAS SUAS PARTIÇÕES${_o}"
 
 echo -en "\n ${_p}Digite o número da partição${_o} ${_g}UEFI${_o} ou tecle ${_am}ENTER${_o} caso não tenha:${_w} "; read _uefi
-echo -en "\n ${_p}Digite o número da partição${_o} ${_g}SWAP${_o} ou tecle ${_am}ENTER${_o} caso não tenha:${_w} "; read _swap
 echo -en "\n ${_p}Digite o número da partição${_o} ${_g}RAÍZ /${_o}${_am} (Partição OBRIGATÓRIA!)${_o}:${_w} "		 ; read  _root
 [ "$_root" == "" ] && { echo -e "\n${_am}Atenção:${_o} ${_p}Partição RAÍZ é obrigatória! Execute novamente o script e digite o número correto!\n${_o}"; exit 1; }
+echo -en "\n ${_p}Digite o número da partição${_o} ${_g}SWAP${_o} ou tecle ${_am}ENTER${_o} caso não tenha:${_w} "; read _swap
 echo -en "\n${_p} Digite o número da partição${_o} ${_g}HOME${_o} ou tecle ${_am}ENTER${_o} caso não tenha:${_w} "; read _home
 
 _root="/dev/nvme0n1p${_root}"; export _root
@@ -155,7 +155,7 @@ echo -e "\n\n ${_n}Continuando com a instalação ...${_o}\n"; sleep 1
 # swap
 if [[ "$_swap" != "" ]]; then
 	echo -e "${_g}==> Criando e ligando Swap${_o}"; sleep 1
-	mkswap $_swap && swapon $_swap
+	mkswap /dev/sda1 && swapon /dev/sda1
 fi
 
 # root
@@ -165,7 +165,7 @@ mkfs.ext4 -F $_root && mount $_root /mnt
 # home
 if [[ "$_home" != "" ]]; then
 	echo -e "${_g}==> Formatando, Criando e Montando Home${_o}"; sleep 1
-	mkfs.ext4 -F $_home && mkdir /mnt/home && mount $_home /mnt/home	
+	mkfs.ext4 -F /dev/sda2 && mkdir /mnt/home && mount /dev/sda2 /mnt/home
 fi
 
 # efi
