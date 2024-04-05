@@ -89,7 +89,7 @@ fi
 
 if [[ "$_notebook" == "s" ]]; then
 	echo -e "${_g}==> Instalando drivers para notebook${_o}"; sleep 1
-	pacman -S iwd --noconfirm
+	pacman -S networkmanager iwd --noconfirm
 fi
 
 echo -e "${_g}==> mkinitcpio${_o}"
